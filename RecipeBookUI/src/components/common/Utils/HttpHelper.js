@@ -12,8 +12,7 @@ export default (route, method, payload) => fetch(Constants.BASE_URL_API + route,
   method,
   headers: {
     'Content-Type': 'application/json'
-    /*Add Authentication token here if JSON Web token is produced in API
-    Authorization: `Bearer ${sessionStorage.getItem('token')}`*/
+    //Authorization: `Bearer ${sessionStorage.getItem('token')}`
   },
   body: JSON.stringify(payload)
 });

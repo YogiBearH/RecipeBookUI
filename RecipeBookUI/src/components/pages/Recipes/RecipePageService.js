@@ -1,4 +1,4 @@
-import HttpHelper from './utils/HttpHelper.js';
+import HttpHelper from '../../common/Utils/HttpHelper.js'
 import Constants from '../../common/Utils/constants.js';
 
 /**
