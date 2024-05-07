@@ -1,0 +1,19 @@
+.card {
+    background-color: rgb(137, 137, 237);
+    flex-shrink: 2;
+    padding: 3em;
+    text-align: center;
+    max-width: 50%;
+  }
+
+  .title {
+    background-color: rgb(59, 193, 79);
+  }
+
+  h1 {
+    background-color: blueviolet;
+  }
+
+  p {
+    background-color: rgb(240, 219, 210);
+  }

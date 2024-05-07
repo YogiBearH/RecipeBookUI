@@ -20,7 +20,8 @@ This command installs a package, and any packages that it depends on.
 1. Run `npm run dev`.
 
 Runs the app in the development mode.
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Open [http://localhost:5173](http://localhost:5173) to view it in the browser.
+** Make sure to have it open in only that, not "http://127.0.0.1:5173/", will be blocked by CORS! **
 
 The page will reload if you make edits.
 You will also see any lint errors in the console.

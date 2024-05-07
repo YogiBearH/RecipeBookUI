@@ -1,0 +1,30 @@
+.app {
+    margin: 20px;
+    display: grid;
+    grid-template-columns: repeat(5, auto);
+    justify-content: space-evenly;
+    grid-gap: 15px;
+  }
+  
+  .cardGrid {
+    margin: 20px;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-gap: 15px;
+  }
+
+  .errMsg {
+    color: red;
+    font-size: 14px;
+    margin: 0px 2px 4px 4px;
+  }
+  
+  .box{
+    width: 400px;
+    background-color: black;
+  }
+  
+  .noRecipes {
+    font-size: 30px;
+    text-align: center;
+  }

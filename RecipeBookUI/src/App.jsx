@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import Header from './components/common/Header/Header.jsx'
-import RecipePage from './components/pages/Recipes/RecipePage.jsx'
+import MainPage from './components/pages/Main/MainPage.jsx'
 import './App.css'
 
 const App = () => {
@@ -13,7 +13,7 @@ const App = () => {
         <p>
           Recipes
         </p>
-        <RecipePage />
+        <MainPage />
       </div>
     </>
   )

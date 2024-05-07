@@ -1,20 +1,19 @@
 import React, { useEffect, useState } from 'react';
-import { Grid } from '@mui/material';
 import RecipeCard from '../../common/Recipe-Card/RecipeCard.jsx';
 import fetchRecipes from './RecipePageService.js';
 
 const RecipePage = () => {
-    const [recipes, setRecipes] = useState([]);
+    const [recipe, setRecipe] = useState([]);
     const [apiError, setApiError] = useState(false);
 
     useEffect(() => {
-        fetchRecipes(setRecipes, setApiError);
+        fetchRecipes(setRecipe, setApiError);
     }, []);
 
     return (
-        <RecipeCard
-            recipe={recipes}
-        />
+        // <RecipeCard
+        //     recipe={recipe}
+        // />
         // <div>
         //     <p>{recipes.recipeName}</p>    
         // </div>

@@ -6,6 +6,11 @@
   text-align: center;
 }
 
-.card {
+/* .card {
+  background-color: rgb(137, 137, 237);
+  background-clip: content-box;
+  flex-shrink: 2;
   padding: 2em;
-}
+  text-align: center;
+  max-width: 50%;
+} */
