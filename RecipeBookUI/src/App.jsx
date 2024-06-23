@@ -1,7 +1,8 @@
-import { useState } from 'react'
-import Header from './components/common/Header/Header.jsx'
-import MainPage from './components/pages/Main/MainPage.jsx'
-import './App.css'
+import { useState } from 'react';
+import Header from './components/common/Header/Header.jsx';
+import './App.css';
+import Routing from './Routing.jsx';
+//import { RecipePage } from './components/pages/Recipe';
 
 const App = () => {
   const [count, setCount] = useState(0)
@@ -10,10 +11,7 @@ const App = () => {
     <>
     <Header />
       <div>
-        <p>
-          Recipes
-        </p>
-        <MainPage />
+        <Routing />
       </div>
     </>
   )
