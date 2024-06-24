@@ -1,30 +1,39 @@
-// import React, { useEffect, useState } from 'react';
-// import RecipeCard from '../../common/Recipe-Card/RecipeCard.jsx';
-// import fetchRecipes from './RecipePageService.js';
+import React, { useEffect, useState } from 'react';
+import RecipeCard from '../../common/Recipe-Card/RecipeCard.jsx';
+import fetchRecipes from './RecipePageService.js';
+import { Card, CardText, CardTitle } from 'react-bootstrap';
+import { useParams } from 'react-router-dom';
 
-// const RecipePage = () => {
-//     const [recipe, setRecipe] = useState([]);
-//     const [apiError, setApiError] = useState(false);
+const RecipePage = ( recipes ) => {
+    const { id } = useParams;
+    const [recipe, setRecipe] = useState([]);
+    const [recipeName, setRecipeName] = useState(recipe.recipeName);
+    const [description, setDescription] = useState(recipe.recipeDescription);
+    useEffect(() => {
+        const recipeDetails = recipe.filter((recipe) => recipe.id === +id)[0];
+        if (recipeDetails !== undefined) {
+            setRecipe(recipeDetails);
+        }
+    }, [recipes]);
 
-//     useEffect(() => {
-//         fetchRecipeById(setRecipe, setApiError);
-//     }, []);
+    useEffect(() => {
+        setRecipeName(recipe.recipeName);
+        setDescription(recipe.description);
+    }, [
+        recipe.recipeName, recipe.description
+    ]);
 
-//     return (
-//         // <RecipeCard
-//         //     recipe={recipe}
-//         // />
-//         // <div>
-//         //     <p>{recipes.recipeName}</p>    
-//         // </div>
-//         /* // <Grid item xs={8} sx={{marginLeft: '320px'}}>
-//         //     {recipes.map((recipe) => (
-//         //         <div key={recipe.id || 'recipe-${index}'}>
-//         //             <RecipeCard recipe={recipe}/>
-//         //         </div>
-//         //     ))}
-//         // </Grid> */
-//     );
-// };
 
-// export default RecipePage;
+    return (
+        <Card className={styles.card}>
+            <CardTitle className={styles.title}>
+                {recipeName}
+            </CardTitle>
+            <CardText>
+                {description}
+            </CardText>
+        </Card>
+    );
+};
+
+export default RecipePage;
