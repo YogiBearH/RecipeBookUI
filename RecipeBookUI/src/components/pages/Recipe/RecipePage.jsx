@@ -1,38 +1,49 @@
 import React, { useEffect, useState } from 'react';
+import styles from './RecipePage.module.css'
 import RecipeCard from '../../common/Recipe-Card/RecipeCard.jsx';
-import fetchRecipes from './RecipePageService.js';
+import fetchRecipesById from './RecipePageService.js';
 import { Card, CardText, CardTitle } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
+import fetchRecipeById from './RecipePageService.js';
 
-const RecipePage = ( recipes ) => {
-    const { id } = useParams;
-    const [recipe, setRecipe] = useState([]);
-    const [recipeName, setRecipeName] = useState(recipe.recipeName);
-    const [description, setDescription] = useState(recipe.recipeDescription);
+const RecipePage = () => {
+    const { id } = useParams();
+    const [apiError, setApiError] = useState(false);
+    const [recipe, setRecipe] = useState(null);
+    const [errorMessage, setErrorMessage] = useState('');
     useEffect(() => {
-        const recipeDetails = recipe.filter((recipe) => recipe.id === +id)[0];
-        if (recipeDetails !== undefined) {
-            setRecipe(recipeDetails);
-        }
-    }, [recipes]);
+        const fetchRecipe = async () => {
+            try {
+                if (!id || isNaN(id)) {
+                    throw new Error('Invalid recipe ID.');
+                }
+                const fetchedRecipe = await fetchRecipeById(id);
+                if (fetchedRecipe) {
+                    setRecipe(fetchedRecipe);
+                } else {
+                    throw new Error('Oops, something went wrong!');
+                }
+            } catch (error) {
+               setApiError(true);
+               setErrorMessage(error.message);
+            }
+        };
+        fetchRecipe();
+    }, [id]);
 
-    useEffect(() => {
-        setRecipeName(recipe.recipeName);
-        setDescription(recipe.description);
-    }, [
-        recipe.recipeName, recipe.description
-    ]);
+    if (apiError) {
+        return <div>{errorMessage}</div>; 
+    }
 
+    if (!recipe) {
+        return <div>Loading...</div>;
+    }
 
     return (
-        <Card className={styles.card}>
-            <CardTitle className={styles.title}>
-                {recipeName}
-            </CardTitle>
-            <CardText>
-                {description}
-            </CardText>
-        </Card>
+        <div>
+            <div className={styles.header}>{recipe.recipeName || errorMessage}</div>
+            <div>{recipe.description || 'No idea ¯\_(ツ)_/¯'}</div>
+        </div>
     );
 };
 

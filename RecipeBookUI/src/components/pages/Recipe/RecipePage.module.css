@@ -21,3 +21,9 @@
     font-size: 30px;
     text-align: center;
   }
+
+  .header {
+    color:blue;
+    font-size: xx-large;
+    margin-top: 10%;
+  }

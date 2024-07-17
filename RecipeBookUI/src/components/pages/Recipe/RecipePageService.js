@@ -8,17 +8,17 @@ import Constants from '../../common/Utils/constants.js';
  * @param {*} setApiError sets error if response other than 200 is returned
  * @returns sets state for products if 200 response, else sets state for apiError
  */
-const fetchRecipeById = async (setRecipe, setApiError, id, recipe) => {
-    await HttpHelper(`${Constants.RECIPE_ENDPOINT}/${id}`, 'GET', recipe)
-        .then((response) => {
-            if (response.ok) {
-                return response.json();
-            }
-            throw new Error(Constants.API_ERROR);
-        })
-        .then(setRecipe)
-        .catch(() => {
-            setApiError(true);
-        })
+const fetchRecipeById = async (id) => {
+    try {
+        const response = await HttpHelper(`${Constants.RECIPE_ENDPOINT}/${id}`, 'GET');
+        if(response.ok) {
+            const recipe = await response.json();
+            return recipe;
+        }
+        throw new Error('Failed to fetch the recipe.');
+    } catch (error) {
+        console.error('Error fetching recipe', error);
+        throw error;
+    }
 }
-export default fetchRecipesById;
+export default fetchRecipeById;
