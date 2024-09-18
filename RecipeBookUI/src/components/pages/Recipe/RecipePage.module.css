@@ -6,15 +6,21 @@
     margin: 20px;
   }
   
+  .box{
+    width: 400px;
+    background-color: black;
+  }
+
   .errMsg {
     color: red;
     font-size: 14px;
     margin: 0px 2px 4px 4px;
   }
   
-  .box{
-    width: 400px;
-    background-color: black;
+  .header {
+    color:blue;
+    font-size: xx-large;
+    margin-top: 10%;
   }
   
   .noRecipes {
@@ -22,8 +28,21 @@
     text-align: center;
   }
 
-  .header {
-    color:blue;
-    font-size: xx-large;
-    margin-top: 10%;
+  .ingredientBox {
+    background-color: darkred;
+    width: 300px;
+    border: 15px solid orange;
+    padding: 50px;
+    margin: 20px;
+  }
+
+  .ingredientHeader {
+    font-size: 45px;
+    background-color: darkcyan;
+    list-style-type: disc;
+  }
+
+  .ingredientItem {
+    font-size: 30px;
+    color: rgb(47, 225, 47);
   }

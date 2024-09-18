@@ -13,7 +13,7 @@ const MainPage = () => {
 
     return (
         <div className={styles.cardGrid}>
-            {recipes.map((recipe, index) =>(
+            {recipes.map((recipe, index) => (
                 <RecipeCard key={index} recipe={recipe} />
             ))}
         </div>

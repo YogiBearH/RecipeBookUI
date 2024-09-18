@@ -39,10 +39,28 @@ const RecipePage = () => {
         return <div>Loading...</div>;
     }
 
+    const ingredients = recipe.ingredients && Array.isArray(recipe.ingredients) ? (
+        recipe.ingredients.map(ingredient => (
+            <div key={ingredient.id} className={styles.ingredientItem}>
+                {ingredient.ingredientName}
+            </div>
+        ))
+    ) : (
+        <div>No ingredients available</div>
+    );
+
     return (
         <div>
             <div className={styles.header}>{recipe.recipeName || errorMessage}</div>
-            <div>{recipe.description || 'No idea ¯\_(ツ)_/¯'}</div>
+            <div>{recipe.description || 'No data ¯\\_(ツ)_/¯'}</div>
+            <div>{"Prep time: " + recipe.prepTime + " minutes" || 'No data ¯\\_(ツ)_/¯'}</div>
+            <div>{"Cook time: " + recipe.cookTime + " minutes" || 'No data ¯\\_(ツ)_/¯'}</div>
+            <div className={styles.ingredientBox}>
+                <div className={styles.ingredientHeader}>{"Ingredients:"}</div>
+                <ul className={styles.ingredientItem}>
+                    {ingredients}
+                </ul>
+            </div>
         </div>
     );
 };
