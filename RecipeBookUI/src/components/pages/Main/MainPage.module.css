@@ -1,5 +1,5 @@
 .app {
-    margin: 20px;
+    margin: 0 auto;
     display: grid;
     grid-template-columns: repeat(5, auto);
     justify-content: space-evenly;
@@ -7,10 +7,11 @@
   }
   
   .cardGrid {
-    margin: 20px;
+    margin: 10%;
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     grid-gap: 15px;
+    top: 10%;
   }
 
   .errMsg {

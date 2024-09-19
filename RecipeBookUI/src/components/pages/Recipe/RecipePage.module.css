@@ -1,12 +1,8 @@
-.app {
-    display: grid;
-    grid-gap: 15px;
-    grid-template-columns: repeat(5, auto);
-    justify-content: space-evenly;
-    margin: 20px;
-  }
-  
-  .box{
+.page {
+  margin: 0 auto; 
+}
+
+.box{
     width: 400px;
     background-color: black;
   }
@@ -33,16 +29,39 @@
     width: 300px;
     border: 15px solid orange;
     padding: 50px;
-    margin: 20px;
+    margin: 0 auto;
   }
 
   .ingredientHeader {
     font-size: 45px;
     background-color: darkcyan;
     list-style-type: disc;
+    margin: 0 auto;
   }
 
   .ingredientItem {
+    margin: 0 auto;
     font-size: 30px;
     color: rgb(47, 225, 47);
+  }
+
+  .stepBox {
+    background-color: bisque;
+    width: auto;
+    border: 15px solid rgb(110, 107, 101);
+    padding: 50px;
+    margin: 20px;
+  }
+
+  .stepHeader {
+    text-align: left;
+    font-size: 45px;
+    background-color: darkcyan;
+    list-style-type: disc;
+  }
+
+  .step {
+    text-align: left;
+    font-size: 30px;
+    color: rgb(42, 107, 42);
   }

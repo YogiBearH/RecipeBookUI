@@ -49,8 +49,18 @@ const RecipePage = () => {
         <div>No ingredients available</div>
     );
 
+    const steps = recipe.recipeSteps && Array.isArray(recipe.recipeSteps) ? (
+        recipe.recipeSteps.map(step => (
+            <li key={step.stepNumber} className={styles.step}>
+                {step.stepDescription}
+            </li>
+        ))
+    ) : (
+        <div>No ingredients available</div>
+    );
+
     return (
-        <div>
+        <div className={styles.page}>
             <div className={styles.header}>{recipe.recipeName || errorMessage}</div>
             <div>{recipe.description || 'No data ¯\\_(ツ)_/¯'}</div>
             <div>{"Prep time: " + recipe.prepTime + " minutes" || 'No data ¯\\_(ツ)_/¯'}</div>
@@ -60,6 +70,12 @@ const RecipePage = () => {
                 <ul className={styles.ingredientItem}>
                     {ingredients}
                 </ul>
+            </div>
+            <div className={styles.stepBox}>
+                <div className={styles.stepHeader}>{"Recipe Steps:"}</div>
+                <ol type="1" className={styles.ingredientItem}>
+                    {steps}
+                </ol>
             </div>
         </div>
     );
