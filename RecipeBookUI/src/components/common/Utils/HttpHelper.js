@@ -14,5 +14,5 @@ export default (route, method, payload) => fetch(Constants.BASE_URL_API + route,
     'Content-Type': 'application/json'
     //Authorization: `Bearer ${sessionStorage.getItem('token')}`
   },
-  body: JSON.stringify(payload)
+  ...(payload && { body: JSON.stringify(payload) })
 });

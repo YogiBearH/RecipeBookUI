@@ -1,10 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import styles from './RecipePage.module.css'
-import RecipeCard from '../../common/Recipe-Card/RecipeCard.jsx';
-import fetchRecipesById from './RecipePageService.js';
-import { Card, CardText, CardTitle } from 'react-bootstrap';
+import styles from './components/RecipePage.module.css'
 import { useParams } from 'react-router-dom';
-import fetchRecipeById from './RecipePageService.js';
+import { fetchRecipeById } from './components/RecipePageService.js';
 
 const RecipePage = () => {
     const { id } = useParams();
@@ -56,7 +53,7 @@ const RecipePage = () => {
             </li>
         ))
     ) : (
-        <div>No ingredients available</div>
+        <div>No steps available</div>
     );
 
     return (
