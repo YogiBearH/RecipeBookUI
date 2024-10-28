@@ -1,79 +1,52 @@
 import React, { useEffect, useState } from 'react';
 import styles from './components/RecipePage.module.css'
 import { useParams } from 'react-router-dom';
-import { fetchRecipeById } from './components/RecipePageService.js';
+import useRecipe from './components/useRecipe.js';
+import { mapIngredients } from './components/utilityFunctions.js';
+import useSteps from './components/useSteps.js';
 
 const RecipePage = () => {
     const { id } = useParams();
-    const [apiError, setApiError] = useState(false);
-    const [recipe, setRecipe] = useState(null);
-    const [errorMessage, setErrorMessage] = useState('');
-    useEffect(() => {
-        const fetchRecipe = async () => {
-            try {
-                if (!id || isNaN(id)) {
-                    throw new Error('Invalid recipe ID.');
-                }
-                const fetchedRecipe = await fetchRecipeById(id);
-                if (fetchedRecipe) {
-                    setRecipe(fetchedRecipe);
-                } else {
-                    throw new Error('Oops, something went wrong!');
-                }
-            } catch (error) {
-               setApiError(true);
-               setErrorMessage(error.message);
-            }
-        };
-        fetchRecipe();
-    }, [id]);
+    console.log(id);
+    const { recipe, errorMessage: recipeError } = useRecipe(id);
 
-    if (apiError) {
-        return <div>{errorMessage}</div>; 
-    }
+    if (recipeError) {
+        return <div>{recipeError}</div>
+    };
 
     if (!recipe) {
-        return <div>Loading...</div>;
-    }
-
-    const ingredients = recipe.ingredients && Array.isArray(recipe.ingredients) ? (
-        recipe.ingredients.map(ingredient => (
-            <div key={ingredient.id} className={styles.ingredientItem}>
-                {ingredient.ingredientName}
-            </div>
-        ))
-    ) : (
-        <div>No ingredients available</div>
-    );
-
-    const steps = recipe.recipeSteps && Array.isArray(recipe.recipeSteps) ? (
-        recipe.recipeSteps.map(step => (
-            <li key={step.stepNumber} className={styles.step}>
-                {step.stepDescription}
-            </li>
-        ))
-    ) : (
-        <div>No steps available</div>
-    );
+        return <div>Loading. . .</div>
+    };
+    console.log(recipe.recipeName);
 
     return (
         <div className={styles.page}>
-            <div className={styles.header}>{recipe.recipeName || errorMessage}</div>
+            <div className={styles.header}>
+                <div>{recipe.recipeName}</div>
+            </div>
+            <div>{"Prep time: " + recipe.prepTime + " minutes"}</div>
+            <div>{"Cook time: " + recipe.cookTime + " minutes"}</div>
             <div>{recipe.description || 'No data ¯\\_(ツ)_/¯'}</div>
-            <div>{"Prep time: " + recipe.prepTime + " minutes" || 'No data ¯\\_(ツ)_/¯'}</div>
-            <div>{"Cook time: " + recipe.cookTime + " minutes" || 'No data ¯\\_(ツ)_/¯'}</div>
             <div className={styles.ingredientBox}>
                 <div className={styles.ingredientHeader}>{"Ingredients:"}</div>
                 <ul className={styles.ingredientItem}>
-                    {ingredients}
+                    {mapIngredients(recipe.ingredient)}
                 </ul>
             </div>
-            <div className={styles.stepBox}>
+            {/* <div className={styles.stepBox}>
                 <div className={styles.stepHeader}>{"Recipe Steps:"}</div>
-                <ol type="1" className={styles.ingredientItem}>
-                    {steps}
-                </ol>
-            </div>
+                {stepsError ? (
+                    <div className={styles.errorMessage}>{stepsError}</div>
+                ) : (
+                    <ol type="1" className={styles.step}>
+                        {stepElements.map((step) => (
+                            <li key={step.id} className={styles.step}>
+                                {step.description}
+                            </li>
+                        ))}
+                    </ol>
+                )}
+            </div> */}
         </div>
     );
 };
