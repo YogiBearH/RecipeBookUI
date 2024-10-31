@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { fetchRecipeById } from './RecipePageService';
+import { transformRecipeSteps } from './utilityFunctions';
 
 const useRecipe = ( recipeId ) => {
     const [recipe, setRecipe] = useState(null);
@@ -14,6 +15,7 @@ const useRecipe = ( recipeId ) => {
             try {
                 const fetchedRecipe = await fetchRecipeById(recipeId);
                 if (fetchedRecipe) {
+                    fetchedRecipe.recipeSteps = transformRecipeSteps(fetchedRecipe);
                     setRecipe(fetchedRecipe);
                 } else {
                     throw new Error('Oops, something went wrong!');

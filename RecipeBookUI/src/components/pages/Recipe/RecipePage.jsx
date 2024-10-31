@@ -2,12 +2,11 @@ import React, { useEffect, useState } from 'react';
 import styles from './components/RecipePage.module.css'
 import { useParams } from 'react-router-dom';
 import useRecipe from './components/useRecipe.js';
-import { mapIngredients } from './components/utilityFunctions.js';
+import { mapIngredients, mapSteps } from './components/utilityFunctions.jsx';
 import useSteps from './components/useSteps.js';
 
 const RecipePage = () => {
     const { id } = useParams();
-    console.log(id);
     const { recipe, errorMessage: recipeError } = useRecipe(id);
 
     if (recipeError) {
@@ -17,7 +16,6 @@ const RecipePage = () => {
     if (!recipe) {
         return <div>Loading. . .</div>
     };
-    console.log(recipe.recipeName);
 
     return (
         <div className={styles.page}>
@@ -26,27 +24,26 @@ const RecipePage = () => {
             </div>
             <div>{"Prep time: " + recipe.prepTime + " minutes"}</div>
             <div>{"Cook time: " + recipe.cookTime + " minutes"}</div>
+            <div>Description:</div>
             <div>{recipe.description || 'No data ¯\\_(ツ)_/¯'}</div>
             <div className={styles.ingredientBox}>
-                <div className={styles.ingredientHeader}>{"Ingredients:"}</div>
+                <div className={styles.ingredientHeader}>Ingredients:</div>
                 <ul className={styles.ingredientItem}>
-                    {mapIngredients(recipe.ingredient)}
+                    {mapIngredients(recipe.ingredients)}
                 </ul>
             </div>
-            {/* <div className={styles.stepBox}>
-                <div className={styles.stepHeader}>{"Recipe Steps:"}</div>
-                {stepsError ? (
-                    <div className={styles.errorMessage}>{stepsError}</div>
-                ) : (
-                    <ol type="1" className={styles.step}>
-                        {stepElements.map((step) => (
-                            <li key={step.id} className={styles.step}>
-                                {step.description}
-                            </li>
-                        ))}
-                    </ol>
-                )}
-            </div> */}
+            <div className={styles.stepBox}>
+                <div className={styles.stepHeader}>Steps:</div>
+                <ol type="1" className={styles.step}>
+                    {recipe.recipeSteps ? recipe.recipeSteps.map((step) => (
+                        <li key={step.id}>
+                            {step.name}
+                        </li>
+                    )) : 
+                    <li>No steps available</li>
+                    }
+                </ol>
+            </div>
         </div>
     );
 };
