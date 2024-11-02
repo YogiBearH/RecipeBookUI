@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { fetchRecipeById } from './RecipePageService';
-import { transformRecipeSteps } from './utilityFunctions';
+import { transformRecipeSteps, transformIngredients } from './utilityFunctions';
 
 const useRecipe = ( recipeId ) => {
     const [recipe, setRecipe] = useState(null);
@@ -14,8 +14,9 @@ const useRecipe = ( recipeId ) => {
         const fetchRecipe = async () => {
             try {
                 const fetchedRecipe = await fetchRecipeById(recipeId);
-                if (fetchedRecipe) {
+                if (fetchedRecipe) {``
                     fetchedRecipe.recipeSteps = transformRecipeSteps(fetchedRecipe);
+                    fetchedRecipe.ingredients = transformIngredients(fetchedRecipe);
                     setRecipe(fetchedRecipe);
                 } else {
                     throw new Error('Oops, something went wrong!');

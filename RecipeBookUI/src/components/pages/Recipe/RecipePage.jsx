@@ -2,8 +2,6 @@ import React, { useEffect, useState } from 'react';
 import styles from './components/RecipePage.module.css'
 import { useParams } from 'react-router-dom';
 import useRecipe from './components/useRecipe.js';
-import { mapIngredients, mapSteps } from './components/utilityFunctions.jsx';
-import useSteps from './components/useSteps.js';
 
 const RecipePage = () => {
     const { id } = useParams();
@@ -29,7 +27,12 @@ const RecipePage = () => {
             <div className={styles.ingredientBox}>
                 <div className={styles.ingredientHeader}>Ingredients:</div>
                 <ul className={styles.ingredientItem}>
-                    {mapIngredients(recipe.ingredients)}
+                    {recipe.ingredients ? recipe.ingredients.map((ingredient) => (
+                        <li key={ingredient.id}>
+                            {ingredient.name}
+                        </li>
+                    )) :
+                    <li>No ingredients available</li>}
                 </ul>
             </div>
             <div className={styles.stepBox}>
