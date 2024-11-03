@@ -15,7 +15,7 @@ const useRecipe = ( recipeId ) => {
             try {
                 const fetchedRecipe = await fetchRecipeById(recipeId);
                 if (fetchedRecipe) {``
-                    fetchedRecipe.recipeSteps = transformRecipeSteps(fetchedRecipe);
+                    //fetchedRecipe.recipeSteps = transformRecipeSteps(fetchedRecipe);
                     fetchedRecipe.ingredients = transformIngredients(fetchedRecipe);
                     setRecipe(fetchedRecipe);
                 } else {
