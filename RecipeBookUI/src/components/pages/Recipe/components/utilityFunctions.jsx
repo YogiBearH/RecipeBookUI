@@ -4,7 +4,7 @@ import React, { createElement } from "react";
 /**
  * Changes the recipe data for easier mapping to list.
  * @param {Array} recipe The recipe's ingredients list/array.
- * @returns A transformed data of the data where id is the ingredient id and the name has the ingredient name, quantity and measurement.
+ * @returns A transformed data of the data where id is the ingredient id and the name is a composition of the ingredient, quantity, and measurementName.
  */
 export const transformIngredients = (recipe) => {
     const ingredients = recipe.ingredients;
@@ -12,7 +12,7 @@ export const transformIngredients = (recipe) => {
     if (ingredients && Array.isArray(ingredients) && ingredients.length > 0) {
         return ingredients.map((ingredient) => ({
             id: ingredient.id,
-            name: `${ingredient.ingredientName} ${ingredient.quantity} ${ingredient.measurementName}`
+            name: ingredient.ingredient
         }))
     } else {
         return []
